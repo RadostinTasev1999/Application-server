@@ -67,10 +67,16 @@ async editPost(content, image, theme, title, postId){
 },
 
 
-async getPostComments(postId){
+async getPostComments(postId,userId){
 
     return await Comment.find({post:postId}).lean()
 
+},
+
+async likeComment(commentId, userId){
+
+    await Comment.findByIdAndUpdate({_id:commentId}, { $push: {likedList: userId}})
+    
 }
 
 

@@ -74,6 +74,22 @@ router.post('/posts/:postId/comments', async(request,response) => {
 
 })
 
+router.post('/posts/:postId/comments/:commentId',async (request, response) => {
+        
+        // const postId = request.params.postId
+        const commentId = request.params.commentId
+        const { userId } = request.body
+
+        try {
+            await dataService.likeComment(commentId, userId)
+            response.json({message: 'Comment successfully liked!'})
+        } catch (error) {   
+            const err = getErrorMessage(error)
+            response.send(err)
+        }
+
+})
+
 router.delete('/posts/:postId',async(request, response) => {
     const postId = request.params.postId
 

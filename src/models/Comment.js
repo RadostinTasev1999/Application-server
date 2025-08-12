@@ -1,5 +1,6 @@
 import { Schema, model, Types } from 'mongoose'
 
+
 const commentSchema = new Schema({
 
     name: {
@@ -17,6 +18,10 @@ const commentSchema = new Schema({
         required: true,
         minLength: 6
     },
+    likedList: [{
+        type: Types.ObjectId,
+        ref:'User'
+    }],
     owner: {
         type: Types.ObjectId,
         ref:'User'

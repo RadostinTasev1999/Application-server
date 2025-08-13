@@ -3,18 +3,17 @@ import { Schema, model, Types } from 'mongoose'
 const postSchema = new Schema({
     theme: {
         type: String,
-        required: true,
-        minLength: 3
+        required: true
     },
     title:{
         type: String,
         required: true,
-        minLength: 3
+        minLength: 5
     },
     description: {
         type: String,
         required: true,
-        minLength: 5
+        minLength: 10
     },
     image: {
         type: String,

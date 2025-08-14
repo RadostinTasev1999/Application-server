@@ -1,5 +1,6 @@
 import Post from '../models/Post.js'
 import Comment from '../models/Comment.js'
+import Podcast from '../models/Podcast.js'
 
 const dataService = {
 
@@ -77,6 +78,20 @@ async likeComment(commentId, userId){
 
     await Comment.findByIdAndUpdate({_id:commentId}, { $push: {likedList: userId}})
     
+},
+
+async getPodcasts(){
+
+    const podcasts = await Podcast.find({}).lean()
+
+    return podcasts
+
+},
+
+async votePodcast(podcastId, userId){
+    console.log('PodcastID is: ', podcastId)
+    await Podcast.findByIdAndUpdate(podcastId, { $push: {VotesList: userId}}, {new: true, upsert: false, strict: false})
+
 }
 
 

@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import dataService from '../services/dataService.js'
 import getErrorMessage from '../utils/util.js'
-import { get } from 'mongoose'
+
 
 const router = Router()
 
@@ -87,6 +87,34 @@ router.post('/posts/:postId/comments/:commentId',async (request, response) => {
             const err = getErrorMessage(error)
             response.send(err)
         }
+
+})
+
+router.get('/posts/:postId/likedList/:userId',async(request,response) => {
+    // const postId = request.params.postId
+    const userId = request.params.userId
+
+    try {
+        const likedPost = await dataService.getPostLike(userId)
+        response.send(likedPost)
+    } catch (error) {
+        
+        response.send(undefined)
+    }
+
+})
+
+router.post('/posts/:postId',async(request,response) => {
+    const postId = request.params.postId
+    const { userId } = request.body
+
+    try {
+        await dataService.likePost(postId,userId)
+        response.send({message: 'Post successfully liked!'})
+    } catch (error) {
+        const err = getErrorMessage(error)
+        response.send(err)
+    }
 
 })
 

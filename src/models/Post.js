@@ -19,9 +19,17 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
+    likedList:[{
+        type: Types.ObjectId,
+        ref: 'User'
+    }],
     owner: {
         type: Types.ObjectId,
         ref: 'User'
+    },
+    created_at: {
+        type: Date,
+        default: Date.now
     }
 })
 

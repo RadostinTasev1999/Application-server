@@ -92,6 +92,21 @@ async votePodcast(podcastId, userId){
     console.log('PodcastID is: ', podcastId)
     await Podcast.findByIdAndUpdate(podcastId, { $push: {VotesList: userId}}, {new: true, upsert: false, strict: false})
 
+},
+
+async likePost(postId,userId){
+
+    await Post.findByIdAndUpdate(postId,{ $push: {likedList: userId}})
+
+},
+
+async getPostLike(userId){
+
+    const post = await Post.findOne({
+        likedList: userId
+    })
+
+    return post
 }
 
 

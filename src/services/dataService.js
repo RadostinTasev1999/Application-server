@@ -76,7 +76,15 @@ async getPostComments(postId,userId){
 
 async likeComment(commentId, userId){
 
-    await Comment.findByIdAndUpdate({_id:commentId}, { $push: {likedList: userId}})
+    const isPostLiked = await Comment.findOne({likedList: userId})
+        
+    if (isPostLiked) {
+        throw new Error(`User ${userId} has already liked comment ${commentId}`)  
+    } else{
+        await Comment.findByIdAndUpdate({_id:commentId}, { $push: {likedList: userId}})
+    }
+
+    
     
 },
 

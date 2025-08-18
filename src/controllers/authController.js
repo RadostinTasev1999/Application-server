@@ -8,10 +8,10 @@ const router = Router()
 
 router.post('/register',async (request,response) => {
 
-    const {username, email,tel,password,rePassword} = request.body
+    const {username, email, phonenumber, position, born, city, country, password, rePassword} = request.body
 
     try {
-         const newUser = await authService.register(username,email,tel,password,rePassword)
+         const newUser = await authService.register(username,email,phonenumber,position,born,city,country,password,rePassword)
          const token = await authService.generateToken(newUser)
         // console.log('User registered!')
         response.cookie('auth',token, { httpOnly: true })

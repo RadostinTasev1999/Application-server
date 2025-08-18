@@ -4,7 +4,7 @@ import brcrypt from 'bcrypt'
 
 const authService = {
 
-    async register(username, email, tel, password, rePassword){
+    async register(username,email,phonenumber,position,born,city,country,password,rePassword){
         // Check for password mismatch
         if (password !== rePassword) {
             throw new Error('Passwords do not match!')
@@ -21,7 +21,7 @@ const authService = {
             throw new Error('User already exists!')
         }
         // Save to DB
-        const newUser = await User.create({username, email,tel, password})
+        const newUser = await User.create({username, email, phonenumber, position, born, city, country, password})
         
         return newUser
         

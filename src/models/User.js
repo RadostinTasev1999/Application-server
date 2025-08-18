@@ -13,7 +13,23 @@ const userSchema = new Schema({
         required: true,
         minLength: 10
     },
-    tel: {
+    phonenumber: {
+        type: String,
+        required: true
+    },
+    position: {
+        type: String,
+        required: true
+    },
+    born: {
+        type: String,
+        required: true
+    },
+    city: {
+        type: String,
+        required: true
+    },
+    country: {
         type: String,
         required: true
     },

@@ -113,7 +113,8 @@ router.post('/posts/:postId',async(request,response) => {
         response.send({message: 'Post successfully liked!'})
     } catch (error) {
         const err = getErrorMessage(error)
-        response.send(err)
+        response.status(200).json({message: err})
+        
     }
 
 })

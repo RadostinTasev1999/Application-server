@@ -76,7 +76,10 @@ async getPostComments(postId,userId){
 
 async likeComment(commentId, userId){
 
-    const isPostLiked = await Comment.findOne({likedList: userId})
+    const isPostLiked = await Comment.findOne({
+        _id: commentId,
+        likedList: userId
+    })
         
     if (isPostLiked) {
         throw new Error(`User ${userId} has already liked comment ${commentId}`)  
@@ -104,7 +107,17 @@ async votePodcast(podcastId, userId){
 
 async likePost(postId,userId){
 
-    await Post.findByIdAndUpdate(postId,{ $push: {likedList: userId}})
+    const isPostLiked = await Post.findOne({
+        _id: postId,
+        likedList: userId
+    }).lean()
+    console.log('Post is:', isPostLiked)
+
+    if (isPostLiked) {
+        throw new Error(`User ${userId} has already liked this Post`)
+    }else{
+        await Post.findByIdAndUpdate(postId,{ $push: {likedList: userId}})
+    }   
 
 },
 

@@ -32,7 +32,7 @@ router.post('/login', async(request, response) => {
          response.cookie('auth',token, { httpOnly: true })
          response.send(registeredUser)
     } catch (error) {
-        response.status(401).json({message: error.message})
+        return response.status(401).json({message: error.message})
     }
 })
 

@@ -32,11 +32,12 @@ router.get('/posts/:postId', async (request,response) => {
 
 })
 
-router.get('/posts/:postId/comments',async (request,response) => {
+router.get('/posts/:postId/comments/:userId',async (request,response) => {
     const postId = request.params.postId
+    const userId = request.params.userId
 
     try {
-        const postComments = await dataService.getPostComments(postId)
+        const postComments = await dataService.getPostComments(postId,userId)
         response.send(postComments)
     } catch (error) {
         const err = getErrorMessage(error)
@@ -82,7 +83,7 @@ router.post('/posts/:postId/comments/:commentId',async (request, response) => {
 
         try {
             await dataService.likeComment(commentId, userId)
-            response.json({message: 'Comment successfully liked!'})
+            response.status(200).json({message: 'Comment successfully liked!'})
         } catch (error) {   
             const err = getErrorMessage(error)
             response.status(200).json({message: err})
@@ -101,6 +102,22 @@ router.get('/posts/:postId/likedList/:userId',async(request,response) => {
         
         response.send(undefined)
     }
+
+})
+
+router.get('/posts/:postId/comments/:userId',async (request,response) => {
+    
+    const postId = request.params.postId
+    const userId = request.params.userId
+
+    try {
+        const userLikedComments = await dataService.getUserComments(postId,userId)
+        response.send(userLikedComments)
+    } catch (error) {
+        const err = getErrorMessage(error)
+        response.status(200).json({message: err})
+    }
+
 
 })
 

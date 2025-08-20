@@ -85,7 +85,7 @@ router.post('/posts/:postId/comments/:commentId',async (request, response) => {
             response.json({message: 'Comment successfully liked!'})
         } catch (error) {   
             const err = getErrorMessage(error)
-            response.send(err)
+            response.status(200).json({message: err})
         }
 
 })
@@ -124,7 +124,7 @@ router.delete('/posts/:postId',async(request, response) => {
 
     try {
         await dataService.deletePost(postId)
-        return response.json({ message: 'Post successfully deleted!' })
+        response.status(200).json({message: 'Post successfully deleted!'})
     } catch (error) {
         const err = getErrorMessage(error)
         response.send(err)

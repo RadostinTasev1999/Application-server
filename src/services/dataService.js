@@ -70,7 +70,18 @@ async editPost(content, image, theme, title, postId){
 
 async getPostComments(postId,userId){
 
-    return await Comment.find({post:postId}).lean()
+   const postComments = await Comment.find({post: postId}).lean()
+
+    if (!postComments) {
+        throw new Error(`No comments for Post ${postId}`)
+    }
+
+    const filteredComments = postComments.map(comment => ({
+        ...comment,
+        likedByCurrentUser: comment.likedList.some(id => id.toString() === userId)
+    }))
+
+    return filteredComments
 
 },
 
@@ -128,8 +139,7 @@ async getPostLike(userId){
     })
 
     return post
-}
-
+},
 
 
 }

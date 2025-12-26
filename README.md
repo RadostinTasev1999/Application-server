@@ -21,4 +21,16 @@
      --name mongodb mongodb/mongodb-community-server:latest
 -->
     - connect to mongodb `mongosh "mongodb://localhost:27017" --username nraboy`
-    
+
+
+## -------------------------------------------------------------------------------
+
+## Set Up the MongoDB Database (Managed)
+
+1. Register in MongoDB Atlas: `https://www.mongodb.com/lp/cloud/atlas/try4-reg?utm_source=google&utm_campaign=search_gs_pl_evergreen_atlas_core-high-int_prosp-brand_gic-null_ww-tier4_ps-all_desktop_eng_lead&utm_term=mongodb%20atlas&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=22031347578&adgroup=173739098633&cq_cmp=22031347578&gad_source=1&gad_campaignid=22031347578&gbraid=0AAAAADQ1400fJQaQBeUhhSoqC6P2XaIuJ&gclid=CjwKCAiAu67KBhAkEiwAY0jAlbqW3jRCH9AqaC3R98dDTkXJQ-sGIt-yhBWrkombRJyo75XWQRwicBoC5hQQAvD_BwE`
+2. Create a cluster: `https://www.mongodb.com/resources/products/fundamentals/mongodb-cluster-setup`
+3. Connect to Cluster:
+     - Connect with MongoDB driver
+     - Select driver and version
+     - Install driver: `npm install mongodb`
+     - Add connection string to application code

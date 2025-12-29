@@ -50,10 +50,18 @@ console.log('ENV variable is:', process.env.PORT)
 
 // Allow requests from localhost:4200
 
-app.use(cors({
-    origin: `http://localhost:4200`,
-    credentials: true // set true if using cookies or auth headers.
-}))
+const corsOptions = {
+    origin: 'http://localhost:4200',
+    credentials: true,
+    methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+    allowHeader: ['Content-Type','Authorization']
+}
+
+app.use(cors(corsOptions))
+// Explicitly handle the "Preflight" for all routes
+// This ensures that an OPTIONS request never hits your actual logic, but gets a clean 204 No Content response with the right headers.
+
+app.options('*',cors(corsOptions))
 
 app.use(express.json())
 
@@ -65,7 +73,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.use(routes)
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3030
 
 app.listen(PORT, () => {
     console.log(`App is running on port http://localhost:${PORT}`)

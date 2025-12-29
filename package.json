@@ -1,15 +1,22 @@
 {
   "name": "application-server",
   "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node server.js"
+  "description": "1. Server Deployment (GCP Cloud Run)\r - [x] Create Project in GCP\r - [x] Clear unused Docker containers and images `docker system prune -a`\r - [x] Create Docker file\r - [] Create docker image `docker build -t angular-application-server .`\r - [] View docker images: `docker images`\r - [] Start local container: `docker run -p 8080:8080 angular-application-server`",
+  "homepage": "https://github.com/RadostinTasev1999/Application-server#readme",
+  "bugs": {
+    "url": "https://github.com/RadostinTasev1999/Application-server/issues"
   },
-  "author": "R.T.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RadostinTasev1999/Application-server.git"
+  },
   "license": "ISC",
-  "description": "",
+  "author": "R.T.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
